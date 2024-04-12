@@ -75,11 +75,11 @@ $studentPhone = $_SESSION['studentPhone'];
                   <table class="table-bordered">
                     <tr>
                       <td style="font-weight: 600;">Total</td>
-                      <td><?php echo $totalDays ?> Days</td>
+                      <td><?php echo $totalDays ?> Times</td>
                     </tr>
                     <tr>
                       <td style="font-weight: 600;">Present</td>
-                      <td><?php echo $presentDays ?> Days</td>
+                      <td><?php echo $presentDays ?> Times</td>
                     </tr>
                     <tr>
                       <td style="font-weight: 600;">Percentage</td>

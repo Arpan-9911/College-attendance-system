@@ -58,9 +58,6 @@ if(isset($_SESSION['staffLogged']) || isset($_SESSION['studentLogged'])){
   <!-- plugins:js -->
   <script src="../vendors/base/vendor.bundle.base.js"></script>
   <!-- endinject -->
-  <!-- Plugin js for this page-->
-  <script src="../vendors/chart.js/Chart.min.js"></script>
-  <!-- End plugin js for this page-->
   <!-- inject:js -->
   <script src="../js/off-canvas.js"></script>
   <script src="../js/hoverable-collapse.js"></script>

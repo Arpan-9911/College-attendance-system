@@ -190,4 +190,5 @@ $staffPhone = $_SESSION['staffPhone'];
       }
     }
   ?>
+  </div>
         <?php include 'footer.php'; ?>

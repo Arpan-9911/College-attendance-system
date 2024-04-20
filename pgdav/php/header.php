@@ -5,7 +5,7 @@ if(isset($_SESSION['adminLogged'])){
   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
       <img src="uploads/pgdavLogo.jpg" alt="LOGO" class="menu-icon" style="width: 40px; height:40px">
-      <a class="navbar-brand brand-logo me-5 mx-2" href="staffDashboard.php">PGDAV(M)</a>
+      <a class="navbar-brand brand-logo me-5 mx-2" href="">PGDAV(M)</a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -85,7 +85,7 @@ if(isset($_SESSION['staffLogged'])){
   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
       <img src="uploads/pgdavLogo.jpg" alt="LOGO" class="menu-icon" style="width: 40px; height:40px">
-      <a class="navbar-brand brand-logo me-5 mx-2" href="staffDashboard.php">PGDAV(M)</a>
+      <a class="navbar-brand brand-logo me-5 mx-2" href="">PGDAV(M)</a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -141,7 +141,7 @@ if(isset($_SESSION['studentLogged'])){
   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <div class="navbar-brand-wrapper d-flex align-items-center justify-content-center">
       <img src="uploads/pgdavLogo.jpg" alt="LOGO" class="menu-icon" style="width: 40px; height:40px">
-      <a class="navbar-brand brand-logo me-5 mx-2" href="staffDashboard.php">PGDAV(M)</a>
+      <a class="navbar-brand brand-logo me-5 mx-2" href="">PGDAV(M)</a>
     </div>
     <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
       <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">

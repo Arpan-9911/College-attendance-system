@@ -46,6 +46,12 @@ if(isset($_SESSION['adminLogged'])){
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="search.php">
+            <i class="ti-search menu-icon"></i>
+            <span class="menu-title">Search Data</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="javascript:newSem()">
             <i class="ti-book menu-icon"></i>
             <span class="menu-title">New Semester</span>

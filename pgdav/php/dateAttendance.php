@@ -37,7 +37,7 @@ $staffPhone = $_SESSION['staffPhone'];
     <?php include "header.php"; ?>
       <!-- partial -->
       <div class="main-panel">
-        <div class="content-wrapper p-3">
+        <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin mb-2">
               <div class="d-flex justify-content-between align-items-center">

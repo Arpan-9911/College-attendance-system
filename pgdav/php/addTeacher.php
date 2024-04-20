@@ -133,16 +133,18 @@ $adminPhone = $_SESSION['adminPhone'];
       // For each row of the sheet but not the first row
       for($row = 2; $row <= $highestRow; $row++ ){
         $teacherName = $workSheet->getCell("A" . $row)->getValue();
-        $teacherSubject = $workSheet->getCell("B" . $row)->getValue();
-        $teacherSubSem = $workSheet->getCell("C" . $row)->getValue();
+        $teacherSubject1 = $workSheet->getCell("B" . $row)->getValue();
+        $teacherSubject2 = $workSheet->getCell("C" . $row)->getValue();
+        $teacherSubject3 = $workSheet->getCell("D". $row)->getValue();
+        $teacherSubject4 = $workSheet->getCell("E". $row)->getValue();
 
         // checking the row is already exist or not
-        $check = "SELECT * FROM `teachertimetable` WHERE `teacherName` = '$teacherName' && teacherSubject='$teacherSubject' && teacherSubSem='$teacherSubSem'";
+        $check = "SELECT * FROM `teachertimetable` WHERE `teacherName` = '$teacherName'";
         $checkResult = mysqli_query($conn, $check);
 
         // If already not exist then add the detail
         if (mysqli_num_rows($checkResult) == 0) {
-          $sql = "INSERT INTO `teachertimetable` (teacherName, teacherSubject, teacherSubsem) VALUES ('$teacherName', '$teacherSubject', '$teacherSubSem')";
+          $sql = "INSERT INTO `teachertimetable` (teacherName, subject1, subject2, subject3, subject4) VALUES ('$teacherName', '$teacherSubject1', '$teacherSubject2', '$teacherSubject3', '$teacherSubject4')";
           $result = mysqli_query($conn, $sql);
         }
       }

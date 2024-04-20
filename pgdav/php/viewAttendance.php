@@ -89,11 +89,11 @@ $staffPhone = $_SESSION['staffPhone'];
                   <div class="d-flex flex-wrap justify-content-between align-items-center">
                     <div>
                       <h4 class="text-danger mb-0">Theory</h4>
-                      <h4 class="text-muted mb-0">Total: <?php echo $countTheory ?> Days</h4>
+                      <h4 class="text-muted mb-0">Total: <?php echo $countTheory ?></h4>
                     </div>
                     <div>
                       <h4 class="text-danger mb-0">Prac/Tut</h4>
-                      <h4 class="text-muted mb-0">Total: <?php echo $countPrac ?> Days</h4>
+                      <h4 class="text-muted mb-0">Total: <?php echo $countPrac ?></h4>
                     </div>
                   </div>
                 </div>
@@ -130,12 +130,12 @@ $staffPhone = $_SESSION['staffPhone'];
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                       <div>
                         <h5 class="text-danger mb-0">Theory</h5>
-                        <h5 class="mb-0 text-muted">Present: <?php echo $presentCountTheory ?> Days</h5>
+                        <h5 class="mb-0 text-muted">Present: <?php echo $presentCountTheory ?></h5>
                         <h5 class="mb-0 text-muted">Percent: <?php echo ($countTheory > 0 ? number_format(($presentCountTheory * 100) / $countTheory, 2) : '0.00'); ?>%</h5>
                       </div>
                       <div>
                         <h5 class="text-danger mb-0">Prac/Tut</h5>
-                        <h5 class="mb-0 text-muted">Present: <?php echo $presentCountPrac ?> Days</h5>
+                        <h5 class="mb-0 text-muted">Present: <?php echo $presentCountPrac ?></h5>
                         <h5 class="mb-0 text-muted">Percent: <?php echo ($countPrac > 0 ? number_format(($presentCountPrac * 100) / $countPrac, 2) : '0.00'); ?>%</h5>
                       </div>
                     </div>
@@ -157,12 +157,12 @@ $staffPhone = $_SESSION['staffPhone'];
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                       <div>
                         <h5 class="text-danger mb-0">Theory</h5>
-                        <h5 class="mb-0 text-muted">Present: 0 Days</h5>
+                        <h5 class="mb-0 text-muted">Present: 0 </h5>
                         <h5 class="mb-0 text-muted">Percent: 0.00 %</h5>
                       </div>
                       <div>
                         <h5 class="text-danger mb-0">Prac/Tut</h5>
-                        <h5 class="mb-0 text-muted">Present: <?php echo $presentCountPrac ?> Days</h5>
+                        <h5 class="mb-0 text-muted">Present: <?php echo $presentCountPrac ?> </h5>
                         <h5 class="mb-0 text-muted">Percent: <?php echo ($countPrac > 0 ? number_format(($presentCountPrac * 100) / $countPrac, 2) : '0.00'); ?>%</h5>
                       </div>
                     </div>

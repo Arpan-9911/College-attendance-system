@@ -71,7 +71,7 @@ $staffPhone = $_SESSION['staffPhone'];
                   <div class="card-body p-3">
                     <p class="card-title text-md-center text-xl-left mb-1"><?php echo $subject ?></p>
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                      <h4 class="mb-0"><?php echo $count ?> Days</h4>
+                      <h4 class="mb-0"><?php echo $count ?> Attendance</h4>
                       <i class="ti-book icon-md text-muted mb-0"></i>
                     </div>
                   </div>
@@ -80,7 +80,7 @@ $staffPhone = $_SESSION['staffPhone'];
           <?php
               while ($row = mysqli_fetch_array($result)){
           ?>
-            <div class="col-md-2 col-6 p-1 stretch-card">
+            <div class="col-md-3 col-6 p-1 stretch-card">
               <div class="card">
                 <a class="card-body text-center btn px-4 py-2" href="dateAttendance.php?subject=<?php echo $subject ?>&date=<?php echo $row['attendanceDate'] ?>&period=<?php echo $row['period'] ?>"><?php echo date_format(date_create($row['attendanceDate']), 'd-m-Y'); echo '<br>'.$row['period']; ?></a>
               </div>

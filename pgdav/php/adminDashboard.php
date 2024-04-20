@@ -49,7 +49,7 @@ $adminPhone = $_SESSION['adminPhone'];
 
           <!-- Total Teachers -->
           <?php
-          $teacher = "SELECT * FROM `staff`";
+          $teacher = "SELECT * FROM `teachertimetable`";
           $resultTeacher = mysqli_query($conn, $teacher);
           $countTeacher = mysqli_num_rows($resultTeacher);
           ?>

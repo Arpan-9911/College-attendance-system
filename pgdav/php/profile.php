@@ -54,6 +54,23 @@ elseif(isset($_SESSION['studentLogged'])){
   <link rel="stylesheet" href="../css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.png" />
+
+  <!-- Extra css -->
+  <style>
+    #exampleInputPassword{
+      position: relative;
+    }
+    #toggleIcon{
+      position: absolute;
+      right: 0px;
+      top: 8px;
+      font-size: 20px;
+      z-index: 10;
+      cursor: pointer;
+      padding: 10px;
+    }
+  </style>
+
 </head>
 <body>
     <?php include "header.php"; ?>
@@ -132,7 +149,8 @@ elseif(isset($_SESSION['studentLogged'])){
                     <i class="ti-lock text-primary"></i>
                   </span>
                   </div>
-                  <input type="text" name="adminPass" class="form-control form-control-lg border-left-0" id="exampleInputPass" value="<?php echo $adminPassword ?>" required>
+                  <input type="password" name="adminPass" class="form-control form-control-lg border-left-0" id="exampleInputPass" value="<?php echo $adminPassword ?>" required>
+                  <i class="ti-lock" id="toggleIcon"></i> 
                 </div>
             </div>
             <div class="my-3 col-12">
@@ -201,7 +219,8 @@ elseif(isset($_SESSION['studentLogged'])){
                     <i class="ti-lock text-primary"></i>
                   </span>
                   </div>
-                  <input type="text" name="staffPass" class="form-control form-control-lg border-left-0" id="exampleInputPass" value="<?php echo $staffPassword ?>" required>
+                  <input type="password" name="staffPass" class="form-control form-control-lg border-left-0" id="exampleInputPass" value="<?php echo $staffPassword ?>" required>
+                  <i class="ti-lock" id="toggleIcon"></i> 
                 </div>
             </div>
             <div class="my-3 col-12">
@@ -265,7 +284,8 @@ elseif(isset($_SESSION['studentLogged'])){
                     <i class="ti-lock text-primary"></i>
                   </span>
                 </div>
-                <input type="text" name="pass" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputPass" value="<?php echo $studentPassword ?>">
+                <input type="password" name="pass" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputPass" value="<?php echo $studentPassword ?>">
+                <i class="ti-lock" id="toggleIcon"></i> 
               </div>
             </div>
           <?php
@@ -274,4 +294,24 @@ elseif(isset($_SESSION['studentLogged'])){
         </div>
       </div>
         <!-- content-wrapper ends -->
+
+  <script>
+  // Get the input and icon elements
+  var inputField = document.getElementById("exampleInputPass");
+  var toggleIcon = document.getElementById("toggleIcon");
+
+  // Function to toggle input type
+  toggleIcon.addEventListener("click", function() {
+    if (inputField.type === "password") {
+      inputField.type = "text";
+      toggleIcon.classList.remove("ti-lock");
+      toggleIcon.classList.add("ti-eye");
+    } else {
+      inputField.type = "password";
+      toggleIcon.classList.remove("ti-eye");
+      toggleIcon.classList.add("ti-lock");
+    }
+  });
+  </script>
+
         <?php include 'footer.php'; ?>

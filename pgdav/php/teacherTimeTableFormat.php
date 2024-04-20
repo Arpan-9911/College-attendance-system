@@ -17,8 +17,10 @@ $sheet = $spreadsheet->getActiveSheet();
 
 // Set headers
 $sheet->setCellValue('A1', "Teacher Name");
-$sheet->setCellValue('B1', "Subject");
-$sheet->setCellValue('C1', "Semester");
+$sheet->setCellValue('B1', "Subject1");
+$sheet->setCellValue('C1', "Subject2");
+$sheet->setCellValue('D1', "Subject3");
+$sheet->setCellValue('E1', "Subject4");
 
 // Save Excel file
 $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);

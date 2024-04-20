@@ -11,7 +11,6 @@ $staffEmail = $_SESSION['staffEmail'];
 $staffPhone = $_SESSION['staffPhone'];
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +44,7 @@ $staffPhone = $_SESSION['staffPhone'];
 
       <!-- partial -->
       <div class="main-panel">
-        <div class="content-wrapper p-3">
+        <div class="content-wrapper">
           <div class="row">
             <div class="col-md-12 grid-margin mb-2">
               <div class="d-flex justify-content-between align-items-center">
@@ -91,26 +90,35 @@ $staffPhone = $_SESSION['staffPhone'];
             }
           }
           ?>
+
+
           <!-- php for selecting students opted for the subject -->
           <?php
-          $sql = "SELECT * FROM `studentsubjects` WHERE (subject1 = '$subject' OR subject2 = '$subject' OR subject3 = '$subject' OR subject4 = '$subject' OR subject5 = '$subject' OR subject6 = '$subject' OR subject7 = '$subject') ORDER BY studentRoll ASC";
-          $result = mysqli_query($conn, $sql);
-          if (mysqli_num_rows($result) <= 0) {
-            echo "<script>alert('No Student Data')</script>";
-            echo "<script>window.location.href = 'staffDashboard.php';</script>";
-          }
-          else {
+
+          if(isset($_POST['copy-btn'])){
+            $date = $_POST['date'];
+            $period = $_POST['period'];
+            $sql = "SELECT * FROM `attendance` WHERE subject = '$subject' AND date = '$date' AND period = '$period' ORDER BY studentRoll ASC";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) <= 0) {
+              echo "<script>alert('No Student Data')</script>";
+              echo "<script>window.location.href = 'markAttendance.php?subject={$subject}';</script>";
+            }
+            else {
           ?>
             <form method="post">
               <div class="fixed-col">
                 <input type="text" name="subject" value="<?php echo $subject ?>" readonly>
-                <input type="date" name="date" value="<?php echo date("Y-m-d") ?>">
+                <input type="date" name="date" value="<?php echo $date ?>">
                 <select name="period">
                   <option value="Theory-1">Theory-1</option>
                   <option value="Theory-2">Theory-2</option>
                   <option value="Prac/Tut-1">Prac/Tut-1</option>
                   <option value="Prac/Tut-2">Prac/Tut-2</option>
                 </select>
+              </div>
+              <div class="copy">
+                <input type="submit" name="copy-btn" value="Copy Attendance">
               </div>
               <table>
                 <tr>
@@ -126,7 +134,7 @@ $staffPhone = $_SESSION['staffPhone'];
                   <td><input type="text" name="studentName[<?php echo $row['studentRoll'] ?>]" value="<?php echo $row['studentName'] ?>" readonly></td>
                   <td><input type="text" name="studentRoll[]" value="<?php echo $row['studentRoll'] ?>" readonly></td>
                   <td><input type="text" name="studentSem[<?php echo $row['studentRoll'] ?>]" value="<?php echo $row['studentSem'] ?>" readonly></td>
-                  <td><input type='checkbox' name="attendance[<?php echo $row['studentRoll'] ?>]" value='Present'></td>
+                  <td><input type='checkbox' name="attendance[<?php echo $row['studentRoll'] ?>]" <?php if($row['attendance'] == 'P') echo "checked" ?>></td>
                 </tr>
           <?php
               }
@@ -136,6 +144,57 @@ $staffPhone = $_SESSION['staffPhone'];
             </form>
           <?php
             }
+          }
+          else{
+            $sql = "SELECT * FROM `studentsubjects` WHERE (subject1 = '$subject' OR subject2 = '$subject' OR subject3 = '$subject' OR subject4 = '$subject' OR subject5 = '$subject' OR subject6 = '$subject' OR subject7 = '$subject') ORDER BY studentRoll ASC";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) <= 0) {
+              echo "<script>alert('No Student Data')</script>";
+              echo "<script>window.location.href = 'staffDashboard.php';</script>";
+            }
+            else {
+          ?>
+              <form method="post">
+                <div class="fixed-col">
+                  <input type="text" name="subject" value="<?php echo $subject ?>" readonly>
+                  <input type="date" name="date" value="<?php echo date("Y-m-d") ?>">
+                  <select name="period">
+                    <option value="Theory-1">Theory-1</option>
+                    <option value="Theory-2">Theory-2</option>
+                    <option value="Prac/Tut-1">Prac/Tut-1</option>
+                    <option value="Prac/Tut-2">Prac/Tut-2</option>
+                  </select>
+                </div>
+
+                <div class="copy">
+                  <input type="submit" name="copy-btn" value="Copy Attendance">
+                </div>
+
+                <table>
+                  <tr>
+                    <th>Student</th>
+                    <th>Roll No.</th>
+                    <th>Semester</th>
+                    <th>P/A</th>
+                  </tr>
+          <?php
+              while ($row = mysqli_fetch_array($result)){
+          ?>
+                  <tr>
+                    <td><input type="text" name="studentName[<?php echo $row['studentRoll'] ?>]" value="<?php echo $row['studentName'] ?>" readonly></td>
+                    <td><input type="text" name="studentRoll[]" value="<?php echo $row['studentRoll'] ?>" readonly></td>
+                    <td><input type="text" name="studentSem[<?php echo $row['studentRoll'] ?>]" value="<?php echo $row['studentSem'] ?>" readonly></td>
+                    <td><input type='checkbox' name="attendance[<?php echo $row['studentRoll'] ?>]" value='Present'></td>
+                  </tr>
+          <?php
+                }
+          ?>
+                </table>
+                <input type='submit' name='submit' value='Submit Attendance' class="submit">
+              </form>
+          <?php
+            }
+          }
           ?>
         </div>
         <?php include 'footer.php'; ?>

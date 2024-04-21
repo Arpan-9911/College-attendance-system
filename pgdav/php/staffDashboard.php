@@ -72,8 +72,6 @@ $staffPhone = $_SESSION['staffPhone'];
                       <a href="markAttendance.php?subject=<?php echo $subject1 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-calendar menu-icon"></i> &nbsp; Mark Attendance</a>
                       <a href="viewAttendance.php?subject=<?php echo $subject1 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-eye menu-icon"></i> &nbsp; View Overall Attendance</a>
                       <a href="editAttendance.php?subject=<?php echo $subject1 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-pencil menu-icon"></i> &nbsp; Edit Attendance</a>
-                      <a href="staffDownloadTheory.php?subject=<?php echo $subject1 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Theory</a>
-                      <a href="staffDownloadPrac.php?subject=<?php echo $subject1 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Prac/Tut</a>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center mt-2">
                       <h4 class="mb-0 mb-md-2 mb-xl-0"><?php echo $count1 ?> Students</h4>
@@ -97,8 +95,6 @@ $staffPhone = $_SESSION['staffPhone'];
                       <a href="markAttendance.php?subject=<?php echo $subject2 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-calendar menu-icon"></i> &nbsp; Mark Attendance</a>
                       <a href="viewAttendance.php?subject=<?php echo $subject2 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-eye menu-icon"></i> &nbsp; View Overall Attendance</a>
                       <a href="editAttendance.php?subject=<?php echo $subject2 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-pencil menu-icon"></i> &nbsp; Edit Attendance</a>
-                      <a href="staffDownloadTheory.php?subject=<?php echo $subject2 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Theory</a>
-                      <a href="staffDownloadPrac.php?subject=<?php echo $subject2 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Prac/Tut</a>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center mt-2">
                       <h4 class="mb-0 mb-md-2 mb-xl-0"><?php echo $count2 ?> Students</h4>
@@ -122,8 +118,6 @@ $staffPhone = $_SESSION['staffPhone'];
                       <a href="markAttendance.php?subject=<?php echo $subject3 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-calendar menu-icon"></i> &nbsp; Mark Attendance</a>
                       <a href="viewAttendance.php?subject=<?php echo $subject3 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-eye menu-icon"></i> &nbsp; View Overall Attendance</a>
                       <a href="editAttendance.php?subject=<?php echo $subject3 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-pencil menu-icon"></i> &nbsp; Edit Attendance</a>
-                      <a href="staffDownloadTheory.php?subject=<?php echo $subject3 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Theory</a>
-                      <a href="staffDownloadPrac.php?subject=<?php echo $subject3 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Prac/Tut</a>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center mt-2">
                       <h4 class="mb-0 mb-md-2 mb-xl-0"><?php echo $count3 ?> Students</h4>
@@ -147,8 +141,6 @@ $staffPhone = $_SESSION['staffPhone'];
                       <a href="markAttendance.php?subject=<?php echo $subject4 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-calendar menu-icon"></i> &nbsp; Mark Attendance</a>
                       <a href="viewAttendance.php?subject=<?php echo $subject4 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-eye menu-icon"></i> &nbsp; View Overall Attendance</a>
                       <a href="editAttendance.php?subject=<?php echo $subject4 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-pencil menu-icon"></i> &nbsp; Edit Attendance</a>
-                      <a href="staffDownloadTheory.php?subject=<?php echo $subject4 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Theory</a>
-                      <a href="staffDownloadPrac.php?subject=<?php echo $subject4 ?>" class="btn-inverse-info my-1 p-2 list-group-item"><i class="ti-download menu-icon"></i> &nbsp; Download Prac/Tut</a>
                     </div>
                     <div class="d-flex flex-wrap justify-content-between align-items-center mt-2">
                       <h4 class="mb-0 mb-md-2 mb-xl-0"><?php echo $count4 ?> Students</h4>

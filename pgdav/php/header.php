@@ -46,13 +46,19 @@ if(isset($_SESSION['adminLogged'])){
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="adminDownload.php">
+            <i class="ti-download menu-icon"></i>
+            <span class="menu-title">Download Attendance</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="search.php">
             <i class="ti-search menu-icon"></i>
             <span class="menu-title">Search Data</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="javascript:newSem()">
+          <a href="javascript:newSem()" class="nav-link">
             <i class="ti-book menu-icon"></i>
             <span class="menu-title">New Semester</span>
           </a>
@@ -111,6 +117,18 @@ if(isset($_SESSION['staffLogged'])){
           <a class="nav-link" href="staffDashboard.php">
             <i class="ti-shield menu-icon"></i>
             <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="staffDownload.php">
+            <i class="ti-download menu-icon"></i>
+            <span class="menu-title">Download Attendance</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="staffFreeze.php">
+            <i class="ti-save menu-icon"></i>
+            <span class="menu-title">Freeze Attendance</span>
           </a>
         </li>
         <li class="nav-item">

@@ -30,7 +30,7 @@ $sheet->setCellValue('A1', 'Student Name');
 $sheet->setCellValue('B1', 'Roll No.');
 
 // Query to fetch distinct dates for the subject
-$dateQuery = "SELECT DISTINCT DATE(date) AS attendanceDate FROM `attendance` WHERE teacherName = '$staffName' AND subject = '$subject' AND period = 'Prac/Tut-1' ORDER BY attendanceDate ASC";
+$dateQuery = "SELECT DISTINCT DATE(date) AS attendanceDate FROM `attendance` WHERE teacherName = '$staffName' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-1' ORDER BY attendanceDate ASC";
 
 $dateResult = mysqli_query($conn, $dateQuery);
 
@@ -39,7 +39,7 @@ if ($dateResult) {
     $rowIndex = 2; // Start from row 2
 
     // Query to fetch student names and roll numbers
-    $studentQuery = "SELECT DISTINCT studentName, studentRoll FROM `attendance` WHERE teacherName = '$staffName' AND subject = '$subject' ORDER BY studentRoll ASC";
+    $studentQuery = "SELECT DISTINCT studentName, studentRoll FROM `attendance` WHERE teacherName = '$staffName' AND subject LIKE '%$subject%' ORDER BY studentRoll ASC";
     $studentResult = mysqli_query($conn, $studentQuery);
 
     if ($studentResult) {
@@ -55,11 +55,11 @@ if ($dateResult) {
                 $sheet->setCellValue($colIndex . 1, $attendanceDate);
                 $name = $studentRow['studentName'];
                 $roll = $studentRow['studentRoll'];
-                $selectDate2 = "SELECT DISTINCT DATE(date) AS attendanceDate2 FROM `attendance` WHERE teacherName = '$staffName' AND subject = '$subject' AND period = 'Prac/Tut-2' AND date = '$attendanceDate'";
+                $selectDate2 = "SELECT DISTINCT DATE(date) AS attendanceDate2 FROM `attendance` WHERE teacherName = '$staffName' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-2' AND date = '$attendanceDate'";
                 $resultDate2 = mysqli_query($conn, $selectDate2);
                 if (mysqli_num_rows($resultDate2) > 0) {
                     // Query to fetch attendance for each student and date
-                    $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName = '$staffName' AND subject = '$subject' AND period = 'Prac/Tut-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
+                    $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName = '$staffName' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
                     $attendanceResult = mysqli_query($conn, $attendanceQuery);
                     if ($attendanceResult) {
                         $attendanceData = mysqli_fetch_assoc($attendanceResult);
@@ -69,7 +69,7 @@ if ($dateResult) {
                     $colIndex++;
                     $attendanceDate = $dateRow['attendanceDate'];
                     $sheet->setCellValue($colIndex . 1, $attendanceDate);
-                    $attendanceQuery2 = "SELECT attendance FROM `attendance` WHERE teacherName = '$staffName' AND subject = '$subject' AND period = 'Prac/Tut-2' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
+                    $attendanceQuery2 = "SELECT attendance FROM `attendance` WHERE teacherName = '$staffName' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-2' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
                     $attendanceResult2 = mysqli_query($conn, $attendanceQuery2);
                     if ($attendanceResult2) {
                         $attendanceData2 = mysqli_fetch_assoc($attendanceResult2);
@@ -80,7 +80,7 @@ if ($dateResult) {
                 }
                 else{
                     // Query to fetch attendance for each student and date
-                    $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName = '$staffName' AND subject = '$subject' AND period = 'Prac/Tut-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
+                    $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName = '$staffName' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
                     $attendanceResult = mysqli_query($conn, $attendanceQuery);
                     if ($attendanceResult) {
                         $attendanceData = mysqli_fetch_assoc($attendanceResult);

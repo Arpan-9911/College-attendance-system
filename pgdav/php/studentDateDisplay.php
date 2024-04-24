@@ -1,16 +1,23 @@
 <?php
+// Include database and start sessions
 include "database.php";
 session_start();
 
-if(!isset($_SESSION['staffLogged'])){
-  header("Location: ../../index.php");
+// Checking user is logged as admin or not
+if (!isset($_SESSION['studentLogged'])) {
+	header('Location: ../../index.php');
+	exit(); // Always exit after header redirects
 }
 
-$staffName = $_SESSION['staffName'];
-$staffEmail = $_SESSION['staffEmail'];
-$staffPhone = $_SESSION['staffPhone'];
-?>
+$studentName = $_SESSION['studentName'];
+$studentRoll = $_SESSION['studentRoll'];
+$subject = $_GET['subject'];
 
+if ($subject == null) {
+  header('Location: studentDashboard.php');
+  exit(); // Always exit after header redirects
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +26,7 @@ $staffPhone = $_SESSION['staffPhone'];
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>PGDAV | Staff</title>
+  <title>PGDAV | Student</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
   <link rel="stylesheet" href="../vendors/base/vendor.bundle.base.css">
@@ -30,13 +37,11 @@ $staffPhone = $_SESSION['staffPhone'];
   <link rel="stylesheet" href="../css/style.css">
   <!-- endinject -->
   <link rel="shortcut icon" href="../images/favicon.png" />
-
-  <link rel="stylesheet" href="markAttendance.css">
 </head>
 <body>
   <!-- partial:partials/_navbar.html -->
   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+    <div class="navbar-brand-wrapper d-flex align-items-center justify-content-center">
       <img src="uploads/pgdavLogo.jpg" alt="LOGO" class="menu-icon" style="width: 40px; height:40px">
       <a class="navbar-brand brand-logo me-5 mx-2" href="">PGDAV(M)</a>
     </div>
@@ -47,7 +52,7 @@ $staffPhone = $_SESSION['staffPhone'];
       <div class="navbar-nav navbar-nav-right">
         <div class="nav-item nav-profile dropdown">
           <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" id="profileDropdown">
-            Hi, <?php echo $staffName ?>
+            Hi, <?php echo $studentName ?>
           </a>
         </div>
       </div>
@@ -55,27 +60,16 @@ $staffPhone = $_SESSION['staffPhone'];
         <span class="ti-view-list"></span>
       </button>
     </div>
-  </nav><!-- partial -->
+  </nav>
+  <!-- partial -->
   <div class="container-fluid page-body-wrapper">
     <!-- partial:partials/_sidebar.html -->
     <nav class="sidebar sidebar-offcanvas bg-white card" id="sidebar">
       <ul class="nav">
         <li class="nav-item">
-          <a class="nav-link" href="staffDashboard.php">
+          <a class="nav-link" href="studentDashboard.php">
             <i class="ti-shield menu-icon"></i>
             <span class="menu-title">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="staffDownload.php">
-            <i class="ti-download menu-icon"></i>
-            <span class="menu-title">Download Attendance</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="staffFreeze.php">
-            <i class="ti-save menu-icon"></i>
-            <span class="menu-title">Freeze Attendance</span>
           </a>
         </li>
         <li class="nav-item">
@@ -92,14 +86,6 @@ $staffPhone = $_SESSION['staffPhone'];
         </li>
       </ul>
     </nav>
-
-    <?php
-    $subject = $_GET['subject'];
-    if ($subject == null) {
-      header('Location: staffDashboard.php');
-    }
-    ?>
-
     <!-- partial -->
     <div class="main-panel">
       <div class="content-wrapper">
@@ -107,49 +93,28 @@ $staffPhone = $_SESSION['staffPhone'];
           <div class="col-md-12 grid-margin mb-2">
             <div class="d-flex justify-content-between align-items-center">
               <div>
-                <h4 class="font-weight-bold mb-0">Edit Attendance</h4>
+                <h4 class="font-weight-bold mb-0"><?php echo $subject ?> Attendance</h4>
               </div>
             </div>
           </div>
           <hr color="black">
         </div>
 
-
         <div class="row">
-          <!-- php for showing all the dates on which attendance was marked -->
+
           <?php
-            $today = date('Y-m-d');
-            $select = "SELECT DISTINCT(date) as attendanceDate, period FROM `attendance` WHERE teacherName = '$staffName' AND subject = '$subject' AND status = 'U' AND date = '$today' ORDER BY date DESC";
-            $result = mysqli_query($conn, $select);
-            if ($result) {
-              $count = mysqli_num_rows($result);
+          $selectDates = "SELECT date FROM `attendance` WHERE studentName = '$studentName' AND studentRoll = '$studentRoll' AND subject = '$subject' AND attendance = 'P' ORDER BY date ASC";
+          $resultDates = mysqli_query($conn, $selectDates);
+          if(mysqli_num_rows($resultDates) > 0){
+            while ($dateRow = mysqli_fetch_assoc($resultDates)) {
           ?>
-          <div class="col-md-12 p-1 card-stretch">
-            <div class="card">
-              <div class="card-body p-3">
-                <p class="card-title text-md-center text-xl-left mb-1"><?php echo $subject ?></p>
-                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                  <h4 class="mb-0"><?php echo $count ?> Attendance</h4>
-                  <i class="ti-book icon-md text-muted mb-0"></i>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h5 class="col-sm-3 col-md-2 col-4 text-center"><?php echo date_format(date_create($dateRow['date']), 'd-m-Y'); ?></h5>
           <?php
-              while ($row = mysqli_fetch_array($result)){
-          ?>
-          <div class="col-md-3 col-6 p-1 stretch-card">
-            <div class="card">
-              <a class="card-body text-center btn px-4 py-2" href="dateAttendance.php?subject=<?php echo $subject ?>&date=<?php echo $row['attendanceDate'] ?>&period=<?php echo $row['period'] ?>"><?php echo date_format(date_create($row['attendanceDate']), 'd-m-Y'); echo '<br>'.$row['period']; ?></a>
-            </div>
-          </div>
-          <?php
-              }
             }
+          }
           ?>
         </div>
       </div>
-      <!-- Content-rwapper end -->
       <!-- partial:partials/_footer.html -->
       <footer class="footer">
         <div class="d-sm-flex justify-content-center justify-content-sm-between">
@@ -170,5 +135,6 @@ $staffPhone = $_SESSION['staffPhone'];
   <script src="../js/hoverable-collapse.js"></script>
   <script src="../js/template.js"></script>
   <!-- endinject -->
+
 </body>
 </html>

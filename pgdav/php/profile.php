@@ -73,25 +73,102 @@ elseif(isset($_SESSION['studentLogged'])){
 
 </head>
 <body>
-    <?php include "header.php"; ?>
-
-      <!-- partial -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="row">
-            <div class="col-md-12 grid-margin mb-2">
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h4 class="font-weight-bold mb-0">PROFILE</h4>
-                </div>
+  <?php
+  if(isset($_SESSION['adminLogged'])){
+  ?>
+  <!-- partial:partials/_navbar.html -->
+  <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+      <img src="uploads/pgdavLogo.jpg" alt="LOGO" class="menu-icon" style="width: 40px; height:40px">
+      <a class="navbar-brand brand-logo me-5 mx-2" href="">PGDAV(M)</a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <span class="ti-view-list"></span>
+      </button>
+      <div class="navbar-nav navbar-nav-right">
+        <div class="nav-item nav-profile dropdown">
+          <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" id="profileDropdown">
+            Hi, <?php echo $adminName ?>
+          </a>
+        </div>
+      </div>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="ti-view-list"></span>
+      </button>
+    </div>
+  </nav><!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas bg-white card" id="sidebar">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="adminDashboard.php">
+            <i class="ti-shield menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="addTeacher.php">
+            <i class="ti-user menu-icon"></i>
+            <span class="menu-title">Teachers</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="addStudent.php">
+            <i class="ti-user menu-icon"></i>
+            <span class="menu-title">Students</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="adminDownload.php">
+            <i class="ti-download menu-icon"></i>
+            <span class="menu-title">Download Attendance</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="search.php">
+            <i class="ti-search menu-icon"></i>
+            <span class="menu-title">Search Data</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="javascript:newSem()" class="nav-link">
+            <i class="ti-book menu-icon"></i>
+            <span class="menu-title">New Semester</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php">
+            <i class="ti-user menu-icon"></i>
+            <span class="menu-title">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">
+            <i class="ti-power-off menu-icon"></i>
+            <span class="menu-title">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-12 grid-margin mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="font-weight-bold mb-0">Search Data</h4>
               </div>
             </div>
-            <hr color="black">
           </div>
+          <hr color="black">
+        </div>
 
         <div class="row">
           <?php
-          if(isset($_SESSION['adminLogged'])){
+          
 
             // Update
             if(isset($_POST['admin-btn'])){
@@ -115,9 +192,9 @@ elseif(isset($_SESSION['studentLogged'])){
                   <span class="input-group-text bg-transparent border-right-0">
                     <i class="ti-user text-primary"></i>
                   </span>
-                  </div>
-                  <input type="text" name="adminName" disabled class="form-control bg-secondary text-white form-control-lg border-left-0" id="exampleInputName" value="<?php echo $adminName ?>" required>
                 </div>
+                <input type="text" name="adminName" disabled class="form-control bg-secondary text-white form-control-lg border-left-0" id="exampleInputName" value="<?php echo $adminName ?>" required>
+              </div>
             </div>
             <div class="form-group col-md-5 col-12 mb-2">
               <label for="exampleInputEmail" class="m-0">Email</label>
@@ -126,9 +203,9 @@ elseif(isset($_SESSION['studentLogged'])){
                   <span class="input-group-text bg-transparent border-right-0">
                     <i class="ti-email text-primary"></i>
                   </span>
-                  </div>
-                  <input type="email" name="adminEmail" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputEmail" value="<?php echo $adminEmail ?>" required>
                 </div>
+                <input type="email" name="adminEmail" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputEmail" value="<?php echo $adminEmail ?>" required>
+              </div>
             </div>
             <div class="form-group col-md-5 col-12 mb-2">
               <label for="exampleInputPhone" class="m-0">Contact</label>
@@ -137,9 +214,9 @@ elseif(isset($_SESSION['studentLogged'])){
                   <span class="input-group-text bg-transparent border-right-0">
                     <i class="ti-mobile text-primary"></i>
                   </span>
-                  </div>
-                  <input type="text" name="adminPhone" class="form-control form-control-lg border-left-0" id="exampleInputPhone" value="<?php echo $adminPhone ?>" required>
                 </div>
+                <input type="text" name="adminPhone" class="form-control form-control-lg border-left-0" id="exampleInputPhone" value="<?php echo $adminPhone ?>" required>
+              </div>
             </div>
             <div class="form-group col-md-5 col-12 mb-2">
               <label for="exampleInputPass" class="m-0">Password</label>
@@ -148,10 +225,10 @@ elseif(isset($_SESSION['studentLogged'])){
                   <span class="input-group-text bg-transparent border-right-0">
                     <i class="ti-lock text-primary"></i>
                   </span>
-                  </div>
-                  <input type="password" name="adminPass" class="form-control form-control-lg border-left-0" id="exampleInputPass" value="<?php echo $adminPassword ?>" required>
-                  <i class="ti-lock" id="toggleIcon"></i> 
                 </div>
+                <input type="password" name="adminPass" class="form-control form-control-lg border-left-0" id="exampleInputPass" value="<?php echo $adminPassword ?>" required>
+                <i class="ti-lock" id="toggleIcon"></i> 
+              </div>
             </div>
             <div class="my-3 col-12">
               <input type="submit" name="admin-btn" class="btn btn-block btn-primary text-white btn-lg font-weight-medium auth-form-btn" value="UPDATE">
@@ -161,8 +238,82 @@ elseif(isset($_SESSION['studentLogged'])){
           }
 
 
-          elseif(isset($_SESSION['staffLogged'])){
+  elseif(isset($_SESSION['staffLogged'])){
+  ?>
+  <!-- partial:partials/_navbar.html -->
+  <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+      <img src="uploads/pgdavLogo.jpg" alt="LOGO" class="menu-icon" style="width: 40px; height:40px">
+      <a class="navbar-brand brand-logo me-5 mx-2" href="">PGDAV(M)</a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <span class="ti-view-list"></span>
+      </button>
+      <div class="navbar-nav navbar-nav-right">
+        <div class="nav-item nav-profile dropdown">
+          <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" id="profileDropdown">
+            Hi, <?php echo $staffName ?>
+          </a>
+        </div>
+      </div>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="ti-view-list"></span>
+      </button>
+    </div>
+  </nav><!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas bg-white card" id="sidebar">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="staffDashboard.php">
+            <i class="ti-shield menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="staffDownload.php">
+            <i class="ti-download menu-icon"></i>
+            <span class="menu-title">Download Attendance</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="staffFreeze.php">
+            <i class="ti-save menu-icon"></i>
+            <span class="menu-title">Freeze Attendance</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php">
+            <i class="ti-user menu-icon"></i>
+            <span class="menu-title">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">
+            <i class="ti-power-off menu-icon"></i>
+            <span class="menu-title">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-12 grid-margin mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="font-weight-bold mb-0">STAFF Dashboard</h4>
+              </div>
+            </div>
+          </div>
+          <hr color="black">
+        </div>
 
+        <div class="row">
+          <?php
             // Update
             if(isset($_POST['staff-btn'])){
               $changedStaffPhone = $_POST['staffPhone'];
@@ -230,70 +381,150 @@ elseif(isset($_SESSION['studentLogged'])){
           <?php
           }
 
-          elseif(isset($_SESSION['studentLogged'])){
-          ?>
-            <div class="form-group col-md-6 col-12 mb-2">
-              <label for="exampleInputName" class="m-0">Name</label>
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <span class="input-group-text bg-transparent border-right-0">
-                    <i class="ti-user text-primary"></i>
-                  </span>
-                </div>
-                <input type="text" name="username" disabled class="form-control bg-secondary text-white form-control-lg border-left-0" id="exampleInputName" value="<?php echo $studentName ?>">
+  elseif(isset($_SESSION['studentLogged'])){
+  ?>
+  <!-- partial:partials/_navbar.html -->
+  <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+    <div class="navbar-brand-wrapper d-flex align-items-center justify-content-center">
+      <img src="uploads/pgdavLogo.jpg" alt="LOGO" class="menu-icon" style="width: 40px; height:40px">
+      <a class="navbar-brand brand-logo me-5 mx-2" href="">PGDAV(M)</a>
+    </div>
+    <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+      <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <span class="ti-view-list"></span>
+      </button>
+      <div class="navbar-nav navbar-nav-right">
+        <div class="nav-item nav-profile dropdown">
+          <a class="nav-link dropdown-toggle" href="" data-bs-toggle="dropdown" id="profileDropdown">
+            Hi, <?php echo $studentName ?>
+          </a>
+        </div>
+      </div>
+      <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        <span class="ti-view-list"></span>
+      </button>
+    </div>
+  </nav>
+  <!-- partial -->
+  <div class="container-fluid page-body-wrapper">
+    <!-- partial:partials/_sidebar.html -->
+    <nav class="sidebar sidebar-offcanvas bg-white card" id="sidebar">
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="studentDashboard.php">
+            <i class="ti-shield menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="profile.php">
+            <i class="ti-user menu-icon"></i>
+            <span class="menu-title">Profile</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="logout.php">
+            <i class="ti-power-off menu-icon"></i>
+            <span class="menu-title">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- partial -->
+    <div class="main-panel">
+      <div class="content-wrapper">
+        <div class="row">
+          <div class="col-md-12 grid-margin mb-2">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h4 class="font-weight-bold mb-0">STUDENT Dashboard</h4>
               </div>
             </div>
-            <div class="form-group col-md-6 col-12 mb-2">
-              <label for="exampleInputRoll" class="m-0">College Roll No.</label>
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <span class="input-group-text bg-transparent border-right-0">
-                    <i class="ti-user text-primary"></i>
-                  </span>
-                </div>
-                <input type="text" name="username" disabled class="form-control bg-secondary text-white form-control-lg border-left-0" id="exampleInputRoll" value="<?php echo $studentRoll ?>">
+          </div>
+          <hr color="black">
+        </div>
+
+        <div class="row">
+          <div class="form-group col-md-6 col-12 mb-2">
+            <label for="exampleInputName" class="m-0">Name</label>
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <span class="input-group-text bg-transparent border-right-0">
+                  <i class="ti-user text-primary"></i>
+                </span>
               </div>
+              <input type="text" name="username" disabled class="form-control bg-secondary text-white form-control-lg border-left-0" id="exampleInputName" value="<?php echo $studentName ?>">
             </div>
-            <div class="form-group col-md-6 col-12 mb-2">
-              <label for="exampleInputEmail" class="m-0">Email</label>
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <span class="input-group-text bg-transparent border-right-0">
-                    <i class="ti-email text-primary"></i>
-                  </span>
-                </div>
-                <input type="email" name="email" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputEmail" value="<?php echo $studentEmail ?>">
+          </div>
+          <div class="form-group col-md-6 col-12 mb-2">
+            <label for="exampleInputRoll" class="m-0">College Roll No.</label>
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <span class="input-group-text bg-transparent border-right-0">
+                  <i class="ti-user text-primary"></i>
+                </span>
               </div>
+              <input type="text" name="username" disabled class="form-control bg-secondary text-white form-control-lg border-left-0" id="exampleInputRoll" value="<?php echo $studentRoll ?>">
             </div>
-            <div class="form-group col-md-6 col-12 mb-2">
-              <label for="exampleInputPhone" class="m-0">Contact</label>
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <span class="input-group-text bg-transparent border-right-0">
-                    <i class="ti-mobile text-primary"></i>
-                  </span>
-                </div>
-                <input type="text" name="phone" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputPhone" value="<?php echo $studentPhone ?>">
+          </div>
+          <div class="form-group col-md-6 col-12 mb-2">
+            <label for="exampleInputEmail" class="m-0">Email</label>
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <span class="input-group-text bg-transparent border-right-0">
+                  <i class="ti-email text-primary"></i>
+                </span>
               </div>
+              <input type="email" name="email" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputEmail" value="<?php echo $studentEmail ?>">
             </div>
-            <div class="form-group col-md-6 col-12 mb-2">
-              <label for="exampleInputPass" class="m-0">Password</label>
-              <div class="input-group">
-                <div class="input-group-prepend bg-transparent">
-                  <span class="input-group-text bg-transparent border-right-0">
-                    <i class="ti-lock text-primary"></i>
-                  </span>
-                </div>
-                <input type="password" name="pass" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputPass" value="<?php echo $studentPassword ?>">
-                <i class="ti-lock" id="toggleIcon"></i> 
+          </div>
+          <div class="form-group col-md-6 col-12 mb-2">
+            <label for="exampleInputPhone" class="m-0">Contact</label>
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <span class="input-group-text bg-transparent border-right-0">
+                  <i class="ti-mobile text-primary"></i>
+                </span>
               </div>
+              <input type="text" name="phone" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputPhone" value="<?php echo $studentPhone ?>">
             </div>
+          </div>
+          <div class="form-group col-md-6 col-12 mb-2">
+            <label for="exampleInputPass" class="m-0">Password</label>
+            <div class="input-group">
+              <div class="input-group-prepend bg-transparent">
+                <span class="input-group-text bg-transparent border-right-0">
+                  <i class="ti-lock text-primary"></i>
+                </span>
+              </div>
+              <input type="password" name="pass" disabled class="form-control form-control-lg bg-secondary text-white border-left-0" id="exampleInputPass" value="<?php echo $studentPassword ?>">
+              <i class="ti-lock" id="toggleIcon"></i> 
+            </div>
+          </div>
           <?php
           }
           ?>
         </div>
       </div>
         <!-- content-wrapper ends -->
+      <!-- partial:partials/_footer.html -->
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © PGDAV College</span>
+        </div>
+      </footer>
+      <!-- partial -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+
+  <script>
+    function newSem() {
+      if(confirm("Are you sure to start new semester !!")){
+        window.location.href = "newSem.php";
+      }
+    }
+  </script>
 
   <script>
   // Get the input and icon elements
@@ -313,5 +544,16 @@ elseif(isset($_SESSION['studentLogged'])){
     }
   });
   </script>
+  
 
-        <?php include 'footer.php'; ?>
+  <!-- plugins:js -->
+  <script src="../vendors/base/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="../js/off-canvas.js"></script>
+  <script src="../js/hoverable-collapse.js"></script>
+  <script src="../js/template.js"></script>
+  <!-- endinject -->
+
+</body>
+</html>

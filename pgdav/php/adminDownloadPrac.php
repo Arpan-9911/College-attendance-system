@@ -9,11 +9,11 @@ if (!isset($_SESSION['adminLogged'])) {
     exit(); // Always exit after header redirects
 }
 
-if(isset($_POST['theory-btn'])){
+if(isset($_POST['prac-btn'])){
     $adminName = $_SESSION['adminName'];
-    $subject = $_POST['theorySubject'];
-    $time = $_POST['timeTheory'];
-    $staffName = $_POST['theoryTeacher'];
+    $subject = $_POST['pracSubject'];
+    $time = $_POST['timePrac'];
+    $staffName = $_POST['pracTeacher'];
     if ($subject == null || $time == null || $staffName == null) {
         header('Location: adminDownload.php');
         exit(); // Always exit after header redirects
@@ -73,8 +73,8 @@ if(isset($_POST['theory-btn'])){
     $sheet->setCellValue('C1', 'Subject');
     $sheet->setCellValue('D1', 'Total Lectures');
 
-    $query = "SELECT DISTINCT DATE(date) as total_taken FROM `attendance` WHERE teacherName LIKE '$staffName' AND subject LIKE '$subject' AND period = 'Theory-1' AND month(date) = $month";
-    $query2 = "SELECT DISTINCT DATE(date) as total_taken FROM `attendance` WHERE teacherName LIKE '$staffName' AND subject LIKE '$subject' AND period = 'Theory-2' AND month(date) = $month";
+    $query = "SELECT DISTINCT DATE(date) as total_taken FROM `attendance` WHERE teacherName LIKE '$staffName' AND subject LIKE '$subject' AND period = 'Prac/Tut-1' AND month(date) = $month";
+    $query2 = "SELECT DISTINCT DATE(date) as total_taken FROM `attendance` WHERE teacherName LIKE '$staffName' AND subject LIKE '$subject' AND period = 'Prac/Tut-2' AND month(date) = $month";
     $result = mysqli_query($conn, $query);
     $result2 = mysqli_query($conn, $query2);
     $count1 = mysqli_num_rows($result);
@@ -88,12 +88,12 @@ if(isset($_POST['theory-btn'])){
 
 
 
-// Set headers
-$sheet->setCellValue('A4', 'Student Name');
-$sheet->setCellValue('B4', 'Roll No.');
+    // Set headers
+    $sheet->setCellValue('A4', 'Student Name');
+    $sheet->setCellValue('B4', 'Roll No.');
 
     // Query to fetch distinct dates for the subject
-    $dateQuery = "SELECT DISTINCT DATE(date) AS attendanceDate FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Theory-1' AND month(date) = $month AND status = 'F' ORDER BY attendanceDate ASC";
+    $dateQuery = "SELECT DISTINCT DATE(date) AS attendanceDate FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-1' AND month(date) = $month AND status = 'F' ORDER BY attendanceDate ASC";
 
     $dateResult = mysqli_query($conn, $dateQuery);
 
@@ -118,11 +118,11 @@ $sheet->setCellValue('B4', 'Roll No.');
                     $sheet->setCellValue($colIndex . 4, $attendanceDate);
                     $name = $studentRow['studentName'];
                     $roll = $studentRow['studentRoll'];
-                    $selectDate2 = "SELECT DISTINCT DATE(date) AS attendanceDate2 FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Theory-2' AND date = '$attendanceDate'";
+                    $selectDate2 = "SELECT DISTINCT DATE(date) AS attendanceDate2 FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-2' AND date = '$attendanceDate'";
                     $resultDate2 = mysqli_query($conn, $selectDate2);
                     if (mysqli_num_rows($resultDate2) > 0) {
                         // Query to fetch attendance for each student and date
-                        $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Theory-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
+                        $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
                         $attendanceResult = mysqli_query($conn, $attendanceQuery);
                         if ($attendanceResult) {
                             $attendanceData = mysqli_fetch_assoc($attendanceResult);
@@ -132,7 +132,7 @@ $sheet->setCellValue('B4', 'Roll No.');
                         $colIndex++;
                         $attendanceDate = $dateRow['attendanceDate'];
                         $sheet->setCellValue($colIndex . 4, $attendanceDate);
-                        $attendanceQuery2 = "SELECT attendance FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Theory-2' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
+                        $attendanceQuery2 = "SELECT attendance FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-2' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
                         $attendanceResult2 = mysqli_query($conn, $attendanceQuery2);
                         if ($attendanceResult2) {
                             $attendanceData2 = mysqli_fetch_assoc($attendanceResult2);
@@ -143,7 +143,7 @@ $sheet->setCellValue('B4', 'Roll No.');
                     }
                     else{
                         // Query to fetch attendance for each student and date
-                        $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Theory-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
+                        $attendanceQuery = "SELECT attendance FROM `attendance` WHERE teacherName LIKE '%$staffName%' AND subject LIKE '%$subject%' AND period = 'Prac/Tut-1' AND date = '$attendanceDate' AND studentName = '$name' AND studentRoll = '$roll'";
                         $attendanceResult = mysqli_query($conn, $attendanceQuery);
                         if ($attendanceResult) {
                             $attendanceData = mysqli_fetch_assoc($attendanceResult);
@@ -163,14 +163,14 @@ $sheet->setCellValue('B4', 'Roll No.');
             exit(); // Always exit after header redirects
         }
     } else {
-        echo "<script>alert('Error occurred while fetching date data');</script>";
+        echo "<script>alert('Attendance is not freezed. Please download later.');</script>";
         echo "<script>window.location.href ='adminDownload.php';</script>";
         exit(); // Always exit after header redirects
     }
 
     // Save Excel file
     $writer = new PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-    $filename = $subject . '-theory-' . $time . '.xlsx';
+    $filename = $subject . '-prac-tut-' . $time . '.xlsx';
 
     // Download the Excel file
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
